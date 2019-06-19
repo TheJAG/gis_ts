@@ -1,6 +1,4 @@
-import binascii
 import os
-import struct
 import xml.etree.ElementTree as _et
 
 from math import atan2
@@ -12,11 +10,11 @@ from lib.utils.utils import XMLUtils, MathUtils
 class TrackTiles:
     TILE_SIZE_METRES = 1024.0
 
+    # rwmapmaker-0.8.2 is used for background help
     def __init__(self, track_tiles_dir):
         self.track_tiles_dir = track_tiles_dir
 
     def read_xml(self):
-        ns = {"d": "http://www.kuju.com/TnT/2003/Delta"}
         track_tiles_xml_list = self.read_all_track_tiles()
 
         value = "000000C04E62603F"
