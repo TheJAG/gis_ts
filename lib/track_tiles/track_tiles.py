@@ -38,10 +38,6 @@ class TrackTiles:
                 for ribbon in ribbon_curves_container.find("RibbonID"):
                     print(ribbon)
 
-                for curves in ribbon_curves_container.findall(".//Curve"):
-                    for curve in curves:
-                        Curve().read_from_xml(curve).to_s()
-
     def read_all_track_tiles(self):
         return [
             BinXmlConverter.bin_to_xml(os.path.join(self.track_tiles_dir, file))
@@ -52,8 +48,20 @@ class TrackTiles:
 
 class Ribbon:
     # has many curves
-    def __init__(self, curve_type, xml_node):
-        self.curve_type = curve_type
+    def __init__(self):
+        self.ribbon_id = None
+        self.ribbon_id_uuid = [0, 0]
+        self.ribbon_id_dev_string = ""
+        self.network_type_id_uuid = [0, 0]
+        self.network_type_id_dev_string = ""
+        self.curves = {}  # curve_id to Curve()
+
+    def read_from_xml(self, xml_node):
+
+        for curves_xml in xml_node.findall(".//Curve"):
+            for curve_xml in curves_xml:
+                curve = Curve().read_from_xml(curve_xml)
+                self.curves[curve.curve_id] = curve
 
 
 class Curve:
