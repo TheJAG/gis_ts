@@ -5,7 +5,9 @@ import urllib.request
 class ProrailReader:
     def __init__(self):
         # base_uri = 'https://mapservices.prorail.nl/arcgis/rest/services/Spoortakken_001/MapServer/4'
-        url = 'https://mapservices.prorail.nl/arcgis/rest/services/Spoortakken_001/MapServer/4/query?objectIds=1&f=pjson'
+        url = (
+            "https://mapservices.prorail.nl/arcgis/rest/services/Spoortakken_001/MapServer/4/query?objectIds=1&f=pjson"
+        )
         response = urllib.request.urlopen(url).read()
         result_dict = json.loads(response)
         print(result_dict)
